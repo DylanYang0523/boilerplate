@@ -1,0 +1,27 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "developer boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "dev-build": "NODE_ENV=development webpack --config=./config/webpack/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DylanYang0523/boilerplate.git"
+  },
+  "author": "Dylan Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DylanYang0523/boilerplate/issues"
+  },
+  "homepage": "https://github.com/DylanYang0523/boilerplate#readme",
+  "devDependencies": {
+    "@babel/core": "7.4.0",
+    "app-root-path": "2.1.0",
+    "react": "16.8.4",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0",
+    "webpack-merge": "4.2.1"
+  }
+}
