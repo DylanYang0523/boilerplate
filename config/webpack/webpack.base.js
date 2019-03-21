@@ -13,7 +13,7 @@ switch (process.env.NODE_ENV) {
     break;
 };
 
-module.exports = webpackMerge({
+module.exports = webpackMerge(webpackConfig, {
   entry: [
     appRootPath.resolve('/src/client/index.jsx')
   ],
@@ -27,8 +27,19 @@ module.exports = webpackMerge({
       {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      server: appRootPath.resolve('/src/server')
+    }
   }
 });

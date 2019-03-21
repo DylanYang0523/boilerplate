@@ -4,7 +4,8 @@
   "description": "developer boilerplate",
   "main": "index.js",
   "scripts": {
-    "dev-build": "NODE_ENV=development webpack --config=./config/webpack/main.js"
+    "build-dev": "NODE_ENV=development webpack --config=./config/webpack/webpack.base.js",
+    "run-dev": "NODE_ENV=development node ./src/server/bootstrap/sever.base.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,15 @@
   "homepage": "https://github.com/DylanYang0523/boilerplate#readme",
   "devDependencies": {
     "@babel/core": "7.4.0",
+    "@babel/preset-env": "7.4.1",
     "app-root-path": "2.1.0",
+    "babel-loader": "8.0.5",
+    "express": "4.16.4",
     "react": "16.8.4",
     "webpack": "4.29.6",
     "webpack-cli": "3.3.0",
+    "webpack-hot-middleware": "2.24.3",
     "webpack-merge": "4.2.1"
-  }
+  },
+  "dependencies": {}
 }
