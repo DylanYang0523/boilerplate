@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 import appRootPath from 'app-root-path';
 
 const app = express();
@@ -15,7 +15,7 @@ const app = express();
 // }
 
 app.use(express.static('public'));
-app.set('views', appRootPath.resolve('server/views'));
+app.set('views', appRootPath.resolve('server/view'));
 app.set('view engine', 'pug');
 app.all('/*', (_req, res) => {
   res.render('index');
