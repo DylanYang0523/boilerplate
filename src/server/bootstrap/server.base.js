@@ -5,17 +5,17 @@ const app = express();
 
 // switch (process.env.NODE_ENV) {
 //   case 'production':
-//     const prodWrapper = require('server/bootstrap/server.prod.js').default;
+//     const prodWrapper = require('./server.prod.js').default;
 //     prodWrapper(app);
 //     break;
 //   case 'development':
-//     const devWrapper = require('server/bootstrap/server.dev.js').default;
+//     const devWrapper = require('./server.dev.js').default;
 //     devWrapper(app);
 //     break;
 // }
 
 app.use(express.static('public'));
-app.set('views', appRootPath.resolve('server/view'));
+app.set('views', appRootPath.resolve('src/server/view'));
 app.set('view engine', 'pug');
 app.all('/*', (_req, res) => {
   res.render('index');
