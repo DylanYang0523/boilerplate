@@ -6,10 +6,10 @@ let webPackConfig;
 console.log('Current environment is ', process.env.NODE_ENV);
 switch (process.env.NODE_ENV) {
   case 'production':
-    webpackConfig = require('./prod.js');
+    webpackConfig = require('./webpack.prod.js');
     break;
   case 'development':
-    webpackConfig = require('./dev.js');
+    webpackConfig = require('./webpack.dev.js');
     break;
 };
 
@@ -28,18 +28,9 @@ module.exports = webpackMerge(webpackConfig, {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
+          loader: 'babel-loader'
         }
       }
     ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-    alias: {
-      server: appRootPath.resolve('/src/server')
-    }
   }
 });

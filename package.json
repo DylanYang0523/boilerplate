@@ -4,8 +4,8 @@
   "description": "developer boilerplate",
   "main": "index.js",
   "scripts": {
-    "build-dev": "NODE_ENV=development webpack --config=./config/webpack/webpack.base.js",
-    "start-dev": "NODE_ENV=development nodemon --exec yarn run babel-node --presets @babel/preset-env ./src/server/bootstrap/server.base.js"
+    "build-dev": "NODE_ENV=development webpack --config=./webpack/webpack.base.js",
+    "start-dev": "NODE_ENV=development nodemon --exec yarn run babel-node ./src/server/bootstrap/server.base.js"
   },
   "repository": {
     "type": "git",
