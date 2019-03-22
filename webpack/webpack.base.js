@@ -1,9 +1,8 @@
 const appRootPath = require('app-root-path');
 const webpackMerge = require('webpack-merge');
 
-let webPackConfig;
+let webpackConfig;
 
-console.log('Current environment is ', process.env.NODE_ENV);
 switch (process.env.NODE_ENV) {
   case 'production':
     webpackConfig = require('./webpack.prod.js');

@@ -9,9 +9,13 @@ const renderApp = () => {
 class App extends React.Component {
   render() {
     return (
-      <div>Working!</div>
+      <div>Working!!!!</div>
     )
   }
 }
 
 renderApp();
+
+if (module.hot) {
+  module.hot.accept(App, renderApp);
+}

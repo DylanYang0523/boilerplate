@@ -4,7 +4,6 @@
   "description": "developer boilerplate",
   "main": "index.js",
   "scripts": {
-    "build-dev": "NODE_ENV=development webpack --config=./webpack/webpack.base.js",
     "start-dev": "NODE_ENV=development nodemon --exec yarn run babel-node ./src/server/bootstrap/server.base.js",
     "build-prod": "NODE_ENV=production webpack --config=./webpack/webpack.base.js",
     "start-prod": "NODE_ENV=production babel-node ./src/server/bootstrap/server.base.js"
@@ -33,6 +32,7 @@
     "react-dom": "16.8.4",
     "webpack": "4.29.6",
     "webpack-cli": "3.3.0",
+    "webpack-dev-middleware": "3.6.1",
     "webpack-hot-middleware": "2.24.3",
     "webpack-merge": "4.2.1"
   }
