@@ -26,6 +26,8 @@
     "app-root-path": "2.1.0",
     "babel-loader": "8.0.5",
     "express": "4.16.4",
+    "fs-extra": "7.0.1",
+    "https": "1.0.0",
     "nodemon": "1.18.10",
     "pug": "2.0.3",
     "react": "16.8.4",

@@ -1,3 +1,5 @@
 node_modules
 public
 yarn-error.log
+server.cert
+server.key

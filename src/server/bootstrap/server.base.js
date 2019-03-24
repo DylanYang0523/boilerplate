@@ -1,4 +1,6 @@
 import express from 'express';
+import fs from 'fs-extra';
+import https from 'https';
 import appRootPath from 'app-root-path';
 
 const app = express();
@@ -21,7 +23,15 @@ app.all('/*', (_req, res) => {
   res.render('index');
   // res.render('index', settings);
 });
-app.listen(3000, (err) => {
+
+const keyPath = appRootPath.resolve('/server.key');
+const certPath = appRootPath.resolve('/server.cert');
+
+https.createServer({
+  key: fs.readFileSync(keyPath),
+  cert: fs.readFileSync(certPath)
+}, app)
+.listen(3000, (err) => {
   if (err) throw err;
-  console.log('>>> Ready on http://localhost:3000');
+  console.log('>>> Ready on https://localhost:3000');
 });
