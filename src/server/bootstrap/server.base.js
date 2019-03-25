@@ -24,8 +24,8 @@ app.all('/*', (_req, res) => {
   // res.render('index', settings);
 });
 
-const keyPath = appRootPath.resolve('/server.key');
-const certPath = appRootPath.resolve('/server.cert');
+const keyPath = appRootPath.resolve('/server.key.pem');
+const certPath = appRootPath.resolve('/server.cert.pem');
 
 https.createServer({
   key: fs.readFileSync(keyPath),
