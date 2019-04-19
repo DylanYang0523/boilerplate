@@ -1,15 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import AppRouter from './routes';
+import rootReducer from './reducers';
 
 const root = document.querySelector('#root');
 const renderApp = () => {
   ReactDOM.render(<App />, root);
 };
 
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 class App extends React.Component {
   render() {
     return (
-      <div>Ummm Working!!!!</div>
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
     )
   }
 }
