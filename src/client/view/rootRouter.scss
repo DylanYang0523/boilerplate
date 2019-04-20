@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  background-color: transparent;
+}
+
+textarea {
+  resize: none;
+  border: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: unset;
+  cursor: pointer;
+}

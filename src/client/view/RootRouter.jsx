@@ -1,22 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import Header from 'Module/header';
 import UserList from 'Scene/userList';
 import Search from 'Scene/search';
+
+import './rootRouter.scss';
 
 const RootRouter = () => {
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/userList">User List</Link>
-          </li>
-          <li>
-            <Link to="/search">Search</Link>
-          </li>
-        </ul>
-      </nav>
+      <Header />
       <Route path="/userList" component={UserList} />
       <Route path="/search" component={Search} />
     </Router>
