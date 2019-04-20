@@ -31,7 +31,8 @@ module.exports = webpackMerge(webpackConfig, {
         }
       },
       {
-        test: /\.(scss)?$/,
+        test: /\.(scss|css)?$/,
+        exclude: /node_modules(?!\/normalize)/,
         use: [
           { loader: 'style-loader' },
           { 

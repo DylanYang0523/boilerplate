@@ -31,6 +31,7 @@
     "fs-extra": "7.0.1",
     "https": "1.0.0",
     "nodemon": "1.18.10",
+    "normalize.css": "^8.0.1",
     "postcss-scss": "2.0.0",
     "pug": "2.0.3",
     "react": "16.8.4",

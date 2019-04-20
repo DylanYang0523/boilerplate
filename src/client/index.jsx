@@ -6,6 +6,8 @@ import { createStore } from 'redux';
 import RootRouter from 'View/RootRouter';
 import rootReducer from 'Reducer';
 
+import 'normalize.css';
+
 const root = document.querySelector('#root');
 const renderApp = () => {
   ReactDOM.render(<App />, root);
