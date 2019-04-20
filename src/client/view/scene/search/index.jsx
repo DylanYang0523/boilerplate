@@ -9,6 +9,8 @@ import {
   Input,
   SearchIcon,
   ResultTableContainer,
+  PaginationContainer,
+  PageBtn,
 } from './SearchStyle';
 
 class Search extends React.Component {
@@ -38,7 +40,59 @@ class Search extends React.Component {
               <i className="material-icons">search</i>
             </SearchIcon>
           </SearchInput>
-          <ResultTableContainer>result table container</ResultTableContainer>
+          <ResultTableContainer>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tweet</th>
+                  <th>Likes</th>
+                  <th>Replies</th>
+                  <th>Retweets</th>
+                  <th>Hashtag</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>11</td>
+                  <td>22</td>
+                  <td>33</td>
+                  <td>44</td>
+                  <td>55</td>
+                  <td>66</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>22</td>
+                  <td>33</td>
+                  <td>44</td>
+                  <td>55</td>
+                  <td>66</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>22</td>
+                  <td>33</td>
+                  <td>44</td>
+                  <td>55</td>
+                  <td>66</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>22</td>
+                  <td>33</td>
+                  <td>44</td>
+                  <td>55</td>
+                  <td>66</td>
+                </tr>
+              </tbody>
+            </table>
+            <PaginationContainer>
+              <PageBtn active>1</PageBtn>
+              <PageBtn>2</PageBtn>
+              <PageBtn>></PageBtn>
+            </PaginationContainer>
+          </ResultTableContainer>
         </ResultContainer>
       </div>
     );

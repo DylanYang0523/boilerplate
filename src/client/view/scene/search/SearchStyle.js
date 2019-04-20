@@ -50,5 +50,46 @@ export const SearchIcon = styled.div`
 
 export const ResultTableContainer = styled.div`
   margin-top: 30px;
-  margin-bottom: 60px;
+  margin-bottom: 90px;
+  background-color: white;
+  padding: 20px 20px 40px 20px;
+  & {
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th {
+      color: #a8a9ad;
+      font-weight: normal;
+    }
+    tr {
+      border-bottom: 1px solid #d7d7d7;
+      display: grid;
+      grid-template-columns: 5fr 2fr 2fr 2fr 2fr 6fr;
+      text-align: left;
+    }
+    thead tr {
+      padding: 0px 0px 20px 0px;
+    }
+    tbody tr {
+      padding: 20px 0px;
+    }
+  }
+`;
+
+export const PaginationContainer = styled.div`
+  margin-top: 50px;
+`;
+
+export const PageBtn = styled.div`
+  border: 1px solid #a8a9ad;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 16px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-color: ${props => props.active ? '#169dd7' : 'white'};
+  color: ${props => props.active ? 'white' : 'black'};
 `;
