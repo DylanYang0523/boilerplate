@@ -31,5 +31,14 @@ module.exports = webpackMerge(webpackConfig, {
         }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.scss'],
+    alias: {
+      Actions: appRootPath.resolve('/src/client/actions'),
+      Components: appRootPath.resolve('/src/client/components'),
+      Reducers: appRootPath.resolve('/src/client/reducers'),
+      Routes: appRootPath.resolve('/src/client/routes'),
+    }
   }
 });
