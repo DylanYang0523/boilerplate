@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import UserList from 'Components/userList';
-import Search from 'Components/search';
+import UserList from 'Component/userList';
+import Search from 'Component/search';
 
 const AppRouter = () => {
   return (

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import AppRouter from './routes';
-import rootReducer from './reducers';
+import AppRouter from './route';
+import rootReducer from './reducer';
 
 const root = document.querySelector('#root');
 const renderApp = () => {

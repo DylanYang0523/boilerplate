@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getUserListStart, getUserListSuccess, getUserListEnd } from 'Actions/userList';
+import { getUserListStart, getUserListSuccess, getUserListEnd } from 'Action/userList';
 
 class UserList extends React.Component {
   componentDidMount() {
