@@ -29,20 +29,6 @@ module.exports = webpackMerge(webpackConfig, {
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.(scss|css)?$/,
-        exclude: /node_modules(?!\/normalize)/,
-        use: [
-          { loader: 'style-loader' },
-          { 
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
-            }
-          }
-        ]
       }
     ]
   },

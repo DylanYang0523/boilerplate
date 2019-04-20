@@ -5,11 +5,14 @@ import Header from 'Module/header';
 import UserList from 'Scene/userList';
 import Search from 'Scene/search';
 
-import './rootRouter.scss';
+import { Normalize } from 'styled-normalize'
+import RootRouterStyle from './RootRouterStyle';
 
 const RootRouter = () => {
   return (
     <Router>
+      <Normalize />
+      <RootRouterStyle />
       <Header />
       <Route path="/userList" component={UserList} />
       <Route path="/search" component={Search} />
