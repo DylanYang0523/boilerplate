@@ -19,9 +19,8 @@ class UserList extends React.Component {
     const { userList } = this.props;
     return (
       <div>
-        <div>Is userList fetching? { String(userList.isFetching) }</div>
         <div>I am UserList page.</div>
-        <button>Fetch User List</button>
+        <div>Is userList fetching? { String(userList.isFetching) }</div>
       </div>
     );
   }
