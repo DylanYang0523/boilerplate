@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import AppRouter from './route';
-import rootReducer from './reducer';
+import RootRouter from 'View/RootRouter';
+import rootReducer from 'Reducer';
 
 const root = document.querySelector('#root');
 const renderApp = () => {
@@ -20,7 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppRouter />
+        <RootRouter />
       </Provider>
     )
   }

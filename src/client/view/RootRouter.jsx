@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import UserList from 'Component/userList';
-import Search from 'Component/search';
+import UserList from 'Scene/userList';
+import Search from 'Scene/search';
 
-const AppRouter = () => {
+const RootRouter = () => {
   return (
     <Router>
       <nav>
@@ -23,4 +23,4 @@ const AppRouter = () => {
   );
 }
 
-export default AppRouter;
+export default RootRouter;
