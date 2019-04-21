@@ -14,11 +14,14 @@ import {
 } from './SearchStyle';
 
 import { 
-  getSearchByUserStart,
   getSearchByHashtagStart,
   getSearchByHashtagSuccess,
   getSearchByHashtagEnd,
   updatePageOfSearchByHashtag,
+  getSearchByUserStart,
+  getSearchByUserSuccess,
+  getSearchByUserEnd,
+  updatePageOfSearchByUser,
 } from 'Action/tweet';
 
 import ResultTable from './component/ResultTable';
@@ -37,6 +40,9 @@ class Search extends React.Component {
     const { currentTab } = this.state;
     if (currentTab === 'hashtag') {
       this.getHashtagData();
+    } 
+    if (currentTab === 'user') {
+      this.getUserData();
     }
   }
   getHashtagData() {
@@ -53,33 +59,73 @@ class Search extends React.Component {
       });
   }
   getUserData() {
-    // call start action
+    const { getSearchByUserStart, getSearchByUserSuccess, getSearchByUserEnd } = this.props;
+    getSearchByUserStart();
+    fetch('https://am-twitter-scrape.herokuapp.com/users/Twitter?pages_limit=3&wait=0')
+      .then(res => res.json())
+      .then(data => {
+        getSearchByUserSuccess(data);
+      })
+      .catch(err => {})
+      .finally(() => {
+        getSearchByUserEnd();
+      });
+  }
+  setCurrentValue() {
+    const { currentTab } = this.state;
+    switch (currentTab) {
+      case 'hashtag':
+        return { 
+          currentPage: this.props.searchByHashtag.page,
+          currentData: this.props.searchByHashtag.data,
+          currentPageClickAction: this.props.updatePageOfSearchByHashtag,
+        };
+      case 'user':
+        return { 
+          currentPage: this.props.searchByUser.page,
+          currentData: this.props.searchByUser.data,
+          currentPageClickAction: this.props.updatePageOfSearchByUser,
+        };
+      default:
+        return {};
+    }
+  }
+  onClickTab(tabName) {
+    this.setState({ currentTab: tabName });
+  }
+  setFirstCharToUppercase(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
   render() {
-    const { searchByHashtag, updatePageOfSearchByHashtag } = this.props;
     const { currentTab } = this.state;
-    const page = searchByHashtag.page;
-    const sliceBegin = 10 * (page - 1);
-    const sliceEnd = 10 * page;
-    const resultList = searchByHashtag.data.slice(sliceBegin, sliceEnd);
+    const { currentPage, currentData, currentPageClickAction } = this.setCurrentValue();
+    const sliceBegin = 10 * (currentPage - 1);
+    const sliceEnd = 10 * currentPage;
+    const resultList = currentData.slice(sliceBegin, sliceEnd);
     return (
       <div>
         <TabContainer>
-          <Link to={{ search: '?tab=hashtag' }} onClick={() => this.setState({ currentTab: 'hashtag' })}>
+          <Link 
+            to={{ search: '?tab=hashtag' }} 
+            onClick={() => this.onClickTab('hashtag')}
+          >
             <Tab active={currentTab === 'hashtag'}>
               Hashtag search
             </Tab>
           </Link>
-          <Link to={{ search: '?tab=user' }} onClick={() => this.setState({ currentTab: 'user' })}>
+          <Link 
+            to={{ search: '?tab=user' }} 
+            onClick={() => this.onClickTab('user')}
+          >
             <Tab active={currentTab === 'user'}>
               User search
             </Tab>
           </Link>
         </TabContainer>
         <ResultContainer>
-          <ResultTitle>Hashtag search</ResultTitle>
+          <ResultTitle>{ `${this.setFirstCharToUppercase(currentTab)} search`}</ResultTitle>
           <SearchInput>
-            <Input placeholder="Search by Hashtag" />
+            <Input placeholder={`Search by ${this.setFirstCharToUppercase(currentTab)}`} />
             <SearchIcon>
               <i className="material-icons">search</i>
             </SearchIcon>
@@ -87,11 +133,11 @@ class Search extends React.Component {
           <ResultTableContainer>
             <ResultTable data={resultList} />
             { 
-              searchByHashtag.data.length > 10 ? 
+              currentData.length > 10 ? 
               <Pagination 
-                onClickPage={ updatePageOfSearchByHashtag }
-                currentPage={ page }
-                totalPage={ Math.ceil(searchByHashtag.data.length/10) }
+                onClickPage={ currentPageClickAction }
+                currentPage={ currentPage }
+                totalPage={ Math.ceil(currentData.length/10) }
               /> :
               <span />
             }
@@ -113,6 +159,9 @@ const mapDispatchToProps = dispatch => ({
   getSearchByHashtagEnd: () => dispatch(getSearchByHashtagEnd()),
   updatePageOfSearchByHashtag: page => dispatch(updatePageOfSearchByHashtag(page)),
   getSearchByUserStart: () => dispatch(getSearchByUserStart()),
+  getSearchByUserSuccess: data => dispatch(getSearchByUserSuccess(data)),
+  getSearchByUserEnd: () => dispatch(getSearchByUserEnd()),
+  updatePageOfSearchByUser: page => dispatch(updatePageOfSearchByUser(page)),
 });
 
 export default connect(
