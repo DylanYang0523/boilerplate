@@ -24,7 +24,7 @@ export const ResultTitle = styled.div`
   margin-bottom: 8px;
 `;
 
-export const SearchInput = styled.div`
+export const SearchInputWrapper = styled.div`
   width: 250px;
   position: relative;
 `;

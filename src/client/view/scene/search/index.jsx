@@ -7,9 +7,6 @@ import {
   Tab,
   ResultContainer,
   ResultTitle,
-  SearchInput,
-  Input,
-  SearchIcon,
   ResultTableContainer,
 } from './SearchStyle';
 
@@ -26,6 +23,7 @@ import {
 
 import ResultTable from './component/ResultTable';
 import Pagination from './component/Pagination';
+import SearchInput from './component/SearchInput';
 
 class Search extends React.Component {
   constructor(props) {
@@ -36,39 +34,32 @@ class Search extends React.Component {
       currentTab: params.get('tab') || 'hashtag',
     }
   }
-  componentDidMount() {
+  getTweetData(keyword) {
     const { currentTab } = this.state;
-    if (currentTab === 'hashtag') {
-      this.getHashtagData();
-    } 
-    if (currentTab === 'user') {
-      this.getUserData();
+    let callApiStartAction, callApiSuccessAction, callApiEndAction;
+    switch (currentTab) {
+      case 'hashtag':
+        callApiStartAction = this.props.getSearchByHashtagStart;
+        callApiSuccessAction = this.props.getSearchByHashtagSuccess;
+        callApiEndAction = this.props.getSearchByHashtagEnd;
+        break;
+      case 'user':
+        callApiStartAction = this.props.getSearchByUserStart;
+        callApiSuccessAction = this.props.getSearchByUserSuccess;
+        callApiEndAction = this.props.getSearchByUserEnd;
+      default:
+        break;
     }
-  }
-  getHashtagData() {
-    const { getSearchByHashtagStart, getSearchByHashtagSuccess, getSearchByHashtagEnd } = this.props;
-    getSearchByHashtagStart();
-    fetch('https://am-twitter-scrape.herokuapp.com/hashtags/Python?pages_limit=3&wait=0')
+    const apiUrl = `https://am-twitter-scrape.herokuapp.com/${currentTab}s/${keyword}?pages_limit=3&wait=0`;
+    callApiStartAction();
+    fetch(apiUrl)
       .then(res => res.json())
       .then(data => {
-        getSearchByHashtagSuccess(data);
+        callApiSuccessAction(data);
       })
       .catch(err => {})
       .finally(() => {
-        getSearchByHashtagEnd();
-      });
-  }
-  getUserData() {
-    const { getSearchByUserStart, getSearchByUserSuccess, getSearchByUserEnd } = this.props;
-    getSearchByUserStart();
-    fetch('https://am-twitter-scrape.herokuapp.com/users/Twitter?pages_limit=3&wait=0')
-      .then(res => res.json())
-      .then(data => {
-        getSearchByUserSuccess(data);
-      })
-      .catch(err => {})
-      .finally(() => {
-        getSearchByUserEnd();
+        callApiEndAction();
       });
   }
   setCurrentValue() {
@@ -124,12 +115,10 @@ class Search extends React.Component {
         </TabContainer>
         <ResultContainer>
           <ResultTitle>{ `${this.setFirstCharToUppercase(currentTab)} search`}</ResultTitle>
-          <SearchInput>
-            <Input placeholder={`Search by ${this.setFirstCharToUppercase(currentTab)}`} />
-            <SearchIcon>
-              <i className="material-icons">search</i>
-            </SearchIcon>
-          </SearchInput>
+          <SearchInput 
+            onClickSearchIcon={(keyword) => this.getTweetData(keyword)} 
+            searchType={this.setFirstCharToUppercase(currentTab)}
+          />
           <ResultTableContainer>
             <ResultTable data={resultList} />
             { 
