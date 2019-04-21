@@ -10,7 +10,7 @@ export const Tab = styled.div`
   padding: 16px;
   cursor: pointer;
   background-color: ${props => props.active ? '#f8f8fa' : 'white'};
-  color: ${props => props.active ? '#169dd7' : 'black'};
+  color: ${props => props.active ? '#169dd7' : '#696969'};
 `;
 
 export const ResultContainer = styled.div`
@@ -64,15 +64,24 @@ export const ResultTableContainer = styled.div`
     }
     tr {
       border-bottom: 1px solid #d7d7d7;
-      display: grid;
-      grid-template-columns: 30% 10% 10% 10% 10% 30%;
       text-align: left;
+      display: grid;
+      grid-template-columns: 28% 8% 8% 8% 8% 30%;
+      grid-column-gap: 2%;
     }
     thead tr {
       padding: 0px 0px 20px 0px;
     }
     tbody tr {
       padding: 20px 0px;
+      color: #696969;
+    }
+    td {
+      height: 40px;
+      overflow: hidden;
+      line-height: 20px;
+      text-overflow: ellipsis;
+      word-break: break-all;
     }
   }
 `;
@@ -91,5 +100,6 @@ export const PageBtn = styled.div`
   height: 40px;
   display: inline-block;
   background-color: ${props => props.active ? '#169dd7' : 'white'};
-  color: ${props => props.active ? 'white' : 'black'};
+  color: ${props => props.active ? 'white' : '#696969'};
+  cursor: pointer;
 `;

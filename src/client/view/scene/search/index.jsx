@@ -11,8 +11,6 @@ import {
   Input,
   SearchIcon,
   ResultTableContainer,
-  PaginationContainer,
-  PageBtn,
 } from './SearchStyle';
 
 import { 
@@ -20,9 +18,11 @@ import {
   getSearchByHashtagStart,
   getSearchByHashtagSuccess,
   getSearchByHashtagEnd,
+  updatePageOfSearchByHashtag,
 } from 'Action/tweet';
 
 import ResultTable from './component/ResultTable';
+import Pagination from './component/Pagination';
 
 class Search extends React.Component {
   constructor(props) {
@@ -56,19 +56,22 @@ class Search extends React.Component {
     // call start action
   }
   render() {
-    const { searchByHashtag } = this.props;
+    const { searchByHashtag, updatePageOfSearchByHashtag } = this.props;
     const { currentTab } = this.state;
-    const resultList = searchByHashtag.data.slice(0,10);
+    const page = searchByHashtag.page;
+    const sliceBegin = 10 * (page - 1);
+    const sliceEnd = 10 * page;
+    const resultList = searchByHashtag.data.slice(sliceBegin, sliceEnd);
     return (
       <div>
         <TabContainer>
           <Link to={{ search: '?tab=hashtag' }} onClick={() => this.setState({ currentTab: 'hashtag' })}>
-            <Tab active={currentTab === 'hashtag' ? true : false}>
+            <Tab active={currentTab === 'hashtag'}>
               Hashtag search
             </Tab>
           </Link>
           <Link to={{ search: '?tab=user' }} onClick={() => this.setState({ currentTab: 'user' })}>
-            <Tab active={currentTab === 'user' ? true : false}>
+            <Tab active={currentTab === 'user'}>
               User search
             </Tab>
           </Link>
@@ -83,11 +86,15 @@ class Search extends React.Component {
           </SearchInput>
           <ResultTableContainer>
             <ResultTable data={resultList} />
-            <PaginationContainer>
-              <PageBtn active>1</PageBtn>
-              <PageBtn>2</PageBtn>
-              <PageBtn>></PageBtn>
-            </PaginationContainer>
+            { 
+              searchByHashtag.data.length > 10 ? 
+              <Pagination 
+                onClickPage={ updatePageOfSearchByHashtag }
+                currentPage={ page }
+                totalPage={ Math.ceil(searchByHashtag.data.length/10) }
+              /> :
+              <span />
+            }
           </ResultTableContainer>
         </ResultContainer>
       </div>
@@ -104,6 +111,7 @@ const mapDispatchToProps = dispatch => ({
   getSearchByHashtagStart: () => dispatch(getSearchByHashtagStart()),
   getSearchByHashtagSuccess: data => dispatch(getSearchByHashtagSuccess(data)),
   getSearchByHashtagEnd: () => dispatch(getSearchByHashtagEnd()),
+  updatePageOfSearchByHashtag: page => dispatch(updatePageOfSearchByHashtag(page)),
   getSearchByUserStart: () => dispatch(getSearchByUserStart()),
 });
 

@@ -17,6 +17,12 @@ export const getSearchByUserEnd = () => ({
     isFetching: false, 
   },
 });
+export const updatePageOfSearchByUser = page => ({
+  type: 'UPDATE_PAGE_OF_SEARCH_BY_USER',
+  payload: {
+    page, 
+  },
+});
 
 // search by hashtag
 export const getSearchByHashtagStart = () => ({
@@ -35,5 +41,11 @@ export const getSearchByHashtagEnd = () => ({
   type: 'GET_SEARCH_BY_HASHTAG_END',
   payload: {
     isFetching: false, 
+  },
+});
+export const updatePageOfSearchByHashtag = page => ({
+  type: 'UPDATE_PAGE_OF_SEARCH_BY_HASHTAG',
+  payload: {
+    page,
   },
 });

@@ -2,10 +2,12 @@ const initState = {
   searchByHashtag: {
     isFetching: false,
     data: [],
+    page: 1,
   },
   searchByUser: {
     isFetching: false,
     data: [],
+    page: 1,
   }
 };
 
@@ -32,6 +34,13 @@ const tweet = (state = initState, action) => {
           isFetching: action.payload.isFetching,
         }
       });
+    case 'UPDATE_PAGE_OF_SEARCH_BY_USER':
+      return Object.assign({}, state, {
+        searchByUser: {
+          ...state.searchByUser,
+          page: action.payload.page,
+        }
+      });
     case 'GET_SEARCH_BY_HASHTAG_START':
       return Object.assign({}, state, {
         searchByHashtag: {
@@ -51,6 +60,13 @@ const tweet = (state = initState, action) => {
         searchByHashtag: {
           ...state.searchByHashtag,
           isFetching: action.payload.isFetching,
+        }
+      });
+    case 'UPDATE_PAGE_OF_SEARCH_BY_HASHTAG':
+      return Object.assign({}, state, {
+        searchByHashtag: {
+          ...state.searchByHashtag,
+          page: action.payload.page,
         }
       });
     default:
