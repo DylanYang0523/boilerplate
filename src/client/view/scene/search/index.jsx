@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import {
   TabContainer,
   Tab,
@@ -13,21 +15,60 @@ import {
   PageBtn,
 } from './SearchStyle';
 
+import { 
+  getSearchByUserStart,
+  getSearchByHashtagStart,
+  getSearchByHashtagSuccess,
+  getSearchByHashtagEnd,
+} from 'Action/tweet';
+
+import ResultTable from './component/ResultTable';
+
 class Search extends React.Component {
-  render() {
-    const { location } = this.props;
+  constructor(props) {
+    super(props);
+    const { location } = props;
     const params = new URLSearchParams(location.search);
-    const tab = params.get('tab');
+    this.state = {
+      currentTab: params.get('tab') || 'hashtag',
+    }
+  }
+  componentDidMount() {
+    const { currentTab } = this.state;
+    if (currentTab === 'hashtag') {
+      this.getHashtagData();
+    }
+  }
+  getHashtagData() {
+    const { getSearchByHashtagStart, getSearchByHashtagSuccess, getSearchByHashtagEnd } = this.props;
+    getSearchByHashtagStart();
+    fetch('https://am-twitter-scrape.herokuapp.com/hashtags/Python?pages_limit=3&wait=0')
+      .then(res => res.json())
+      .then(data => {
+        getSearchByHashtagSuccess(data);
+      })
+      .catch(err => {})
+      .finally(() => {
+        getSearchByHashtagEnd();
+      });
+  }
+  getUserData() {
+    // call start action
+  }
+  render() {
+    const { searchByHashtag } = this.props;
+    const { currentTab } = this.state;
+    const resultList = searchByHashtag.data.slice(0,10);
     return (
       <div>
         <TabContainer>
-          <Link to={{ search: '?tab=hashtag' }}>
-            <Tab active={tab === 'hashtag' ? true : false}>
+          <Link to={{ search: '?tab=hashtag' }} onClick={() => this.setState({ currentTab: 'hashtag' })}>
+            <Tab active={currentTab === 'hashtag' ? true : false}>
               Hashtag search
             </Tab>
           </Link>
-          <Link to={{ search: '?tab=user' }}>
-            <Tab active={tab === 'user' ? true : false}>
+          <Link to={{ search: '?tab=user' }} onClick={() => this.setState({ currentTab: 'user' })}>
+            <Tab active={currentTab === 'user' ? true : false}>
               User search
             </Tab>
           </Link>
@@ -41,52 +82,7 @@ class Search extends React.Component {
             </SearchIcon>
           </SearchInput>
           <ResultTableContainer>
-            <table>
-              <thead>
-                <tr>
-                  <th>Tweet</th>
-                  <th>Likes</th>
-                  <th>Replies</th>
-                  <th>Retweets</th>
-                  <th>Hashtag</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>11</td>
-                  <td>22</td>
-                  <td>33</td>
-                  <td>44</td>
-                  <td>55</td>
-                  <td>66</td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>22</td>
-                  <td>33</td>
-                  <td>44</td>
-                  <td>55</td>
-                  <td>66</td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>22</td>
-                  <td>33</td>
-                  <td>44</td>
-                  <td>55</td>
-                  <td>66</td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>22</td>
-                  <td>33</td>
-                  <td>44</td>
-                  <td>55</td>
-                  <td>66</td>
-                </tr>
-              </tbody>
-            </table>
+            <ResultTable data={resultList} />
             <PaginationContainer>
               <PageBtn active>1</PageBtn>
               <PageBtn>2</PageBtn>
@@ -99,4 +95,19 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+const mapStateToProps = state => ({
+  searchByHashtag: state.tweet.searchByHashtag,
+  searchByUser: state.tweet.searchByUser,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getSearchByHashtagStart: () => dispatch(getSearchByHashtagStart()),
+  getSearchByHashtagSuccess: data => dispatch(getSearchByHashtagSuccess(data)),
+  getSearchByHashtagEnd: () => dispatch(getSearchByHashtagEnd()),
+  getSearchByUserStart: () => dispatch(getSearchByUserStart()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Search);

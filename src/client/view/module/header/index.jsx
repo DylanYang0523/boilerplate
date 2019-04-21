@@ -10,7 +10,7 @@ class Header extends React.Component {
         <Link to="/userList">
           <Term>USER LIST</Term>
         </Link>
-        <Link to="/search">
+        <Link to="/search?tab=hashtag">
           <Term>SEARCH</Term>
         </Link>
       </Nav>

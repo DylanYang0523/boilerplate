@@ -65,7 +65,7 @@ export const ResultTableContainer = styled.div`
     tr {
       border-bottom: 1px solid #d7d7d7;
       display: grid;
-      grid-template-columns: 5fr 2fr 2fr 2fr 2fr 6fr;
+      grid-template-columns: 30% 10% 10% 10% 10% 30%;
       text-align: left;
     }
     thead tr {
