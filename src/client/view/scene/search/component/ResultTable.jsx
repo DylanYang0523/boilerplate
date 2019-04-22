@@ -1,9 +1,20 @@
 import React from 'react';
+import Loading from 'Module/loading';
 
 class ResultTable extends React.Component {
   renderTbody(tweets) {
-    const { data } = this.props;
-    if (data instanceof Array && data.length > 0) {
+    const { data, isFetching } = this.props;
+    if (isFetching) {
+      return (
+        <tbody>
+          <tr>
+            <td>
+              <Loading />
+            </td>
+          </tr>
+        </tbody>
+      );
+    } else if (data instanceof Array && data.length > 0) {
       return (
         <tbody>
           {

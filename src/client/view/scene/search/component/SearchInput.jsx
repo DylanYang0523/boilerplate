@@ -8,13 +8,14 @@ import {
 
 class SearchInput extends React.Component {
   onSearch() {
-    const { onClickSearchIcon } = this.props;
+    const { onClickSearchIcon, isFetching } = this.props;
+    if (isFetching) return;
     const inputValue = this.searchInput.value;
     this.searchInput.value = '';
     onClickSearchIcon(inputValue);
   }
   render() {
-    const { searchType, onClickSearchIcon } = this.props;
+    const { searchType } = this.props;
     return (
       <SearchInputWrapper>
         <Input 

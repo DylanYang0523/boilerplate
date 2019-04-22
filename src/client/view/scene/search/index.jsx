@@ -36,7 +36,7 @@ class Search extends React.Component {
   }
   getTweetData(keyword) {
     const { currentTab } = this.state;
-    let callApiStartAction, callApiSuccessAction, callApiEndAction;
+    let canCallApi, callApiStartAction, callApiSuccessAction, callApiEndAction;
     switch (currentTab) {
       case 'hashtag':
         callApiStartAction = this.props.getSearchByHashtagStart;
@@ -74,12 +74,14 @@ class Search extends React.Component {
         return { 
           currentPage: this.props.searchByHashtag.page,
           currentData: this.props.searchByHashtag.data,
+          currentDataIsFetching: this.props.searchByHashtag.isFetching,
           currentPageClickAction: this.props.updatePageOfSearchByHashtag,
         };
       case 'user':
         return { 
           currentPage: this.props.searchByUser.page,
           currentData: this.props.searchByUser.data,
+          currentDataIsFetching: this.props.searchByUser.isFetching,
           currentPageClickAction: this.props.updatePageOfSearchByUser,
         };
       default:
@@ -94,7 +96,12 @@ class Search extends React.Component {
   }
   render() {
     const { currentTab } = this.state;
-    const { currentPage, currentData, currentPageClickAction } = this.setCurrentValue();
+    const { 
+      currentPage,
+      currentData, 
+      currentDataIsFetching, 
+      currentPageClickAction,
+    } = this.setCurrentValue();
     const sliceBegin = 10 * (currentPage - 1);
     const sliceEnd = 10 * currentPage;
     const resultList = currentData.slice(sliceBegin, sliceEnd);
@@ -123,11 +130,12 @@ class Search extends React.Component {
           <SearchInput 
             onClickSearchIcon={(keyword) => this.getTweetData(keyword)} 
             searchType={this.setFirstCharToUppercase(currentTab)}
+            isFetching={currentDataIsFetching}
           />
           <ResultTableContainer>
-            <ResultTable data={resultList} />
+            <ResultTable data={resultList} isFetching={currentDataIsFetching}/>
             { 
-              currentData.length > 10 ? 
+              !currentDataIsFetching && currentData.length > 10 ? 
               <Pagination 
                 onClickPage={ currentPageClickAction }
                 currentPage={ currentPage }

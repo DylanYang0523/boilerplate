@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <Nav>
-        <Link to="/search?tab=hashtag">
+        <Link to="/search">
           <Term>Tweet Searcher</Term>
         </Link>
       </Nav>
