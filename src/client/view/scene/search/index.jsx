@@ -52,7 +52,12 @@ class Search extends React.Component {
     }
     const apiUrl = `https://am-twitter-scrape.herokuapp.com/${currentTab}s/${keyword}?pages_limit=3&wait=0`;
     callApiStartAction();
-    fetch(apiUrl)
+    fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
       .then(res => res.json())
       .then(data => {
         callApiSuccessAction(data);
