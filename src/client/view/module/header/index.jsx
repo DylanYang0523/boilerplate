@@ -7,11 +7,8 @@ class Header extends React.Component {
   render() {
     return (
       <Nav>
-        <Link to="/userList">
-          <Term>USER LIST</Term>
-        </Link>
         <Link to="/search?tab=hashtag">
-          <Term>SEARCH</Term>
+          <Term>Tweet Searcher</Term>
         </Link>
       </Nav>
     );

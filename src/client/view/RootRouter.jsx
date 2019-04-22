@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from 'Module/header';
-import UserList from 'Scene/userList';
 import Search from 'Scene/search';
 
 import { Normalize } from 'styled-normalize'
@@ -14,7 +13,6 @@ const RootRouter = () => {
       <Normalize />
       <RootRouterStyle />
       <Header />
-      <Route path="/userList" component={UserList} />
       <Route path="/search" component={Search} />
     </Router>
   );
