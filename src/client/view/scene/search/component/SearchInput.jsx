@@ -14,6 +14,11 @@ class SearchInput extends React.Component {
     this.searchInput.value = '';
     onClickSearchIcon(inputValue);
   }
+  handleKeyPress(event) {
+    if(event.key == 'Enter'){
+      this.onSearch();
+    }
+  }
   render() {
     const { searchType } = this.props;
     return (
@@ -21,6 +26,7 @@ class SearchInput extends React.Component {
         <Input 
           placeholder={`Search by ${searchType}`} 
           ref={ ref => this.searchInput = ref }
+          onKeyPress={(e) => this.handleKeyPress(e)}
         />
         <SearchIcon onClick={() => this.onSearch()}>
           <i className="material-icons">search</i>

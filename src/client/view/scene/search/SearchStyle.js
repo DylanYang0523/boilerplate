@@ -11,6 +11,9 @@ export const Tab = styled.div`
   cursor: pointer;
   background-color: ${props => props.active ? '#f8f8fa' : 'white'};
   color: ${props => props.active ? '#169dd7' : '#696969'};
+  &:hover {
+    color: #169dd7;
+  }
 `;
 
 export const ResultContainer = styled.div`
@@ -101,4 +104,8 @@ export const PageBtn = styled.div`
   background-color: ${props => props.active ? '#169dd7' : 'white'};
   color: ${props => props.active ? 'white' : '#696969'};
   cursor: pointer;
+  &:hover {
+    background-color: #169dd7;
+    color: white;
+  }
 `;
