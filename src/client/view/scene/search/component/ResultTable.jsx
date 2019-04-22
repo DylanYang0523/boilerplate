@@ -8,12 +8,13 @@ class ResultTable extends React.Component {
         <tbody>
           {
             tweets.map((tweet, index) => {
+              const text = tweet.text.slice(0,50);
               const hashtags = tweet.hashtags.slice(0,2).join(', ');
               const dateArr = tweet.date.split(' ');
               const dateStr = `${dateArr[4]} ${dateArr[3]} ${dateArr[5]}`;
               return (
                 <tr key={`tweet${index}`}>
-                  <td>{tweet.text}</td>
+                  <td>{text.length === 50 ? `${text}...` : text}</td>
                   <td>{tweet.likes || '-'}</td>
                   <td>{tweet.replies || '-'}</td>
                   <td>{tweet.retweets || '-'}</td>
