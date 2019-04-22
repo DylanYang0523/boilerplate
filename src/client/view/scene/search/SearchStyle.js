@@ -81,7 +81,6 @@ export const ResultTableContainer = styled.div`
       overflow: hidden;
       line-height: 20px;
       text-overflow: ellipsis;
-      word-break: break-all;
     }
   }
 `;
