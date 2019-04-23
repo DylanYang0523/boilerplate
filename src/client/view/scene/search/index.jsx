@@ -109,7 +109,7 @@ class Search extends React.Component {
       <div>
         <TabContainer>
           <Link 
-            to={{ search: '?tab=hashtag' }} 
+            to={{ pathname: '/search', search: '?tab=hashtag' }} 
             onClick={() => this.onClickTab('hashtag')}
           >
             <Tab active={currentTab === 'hashtag'}>
@@ -117,7 +117,7 @@ class Search extends React.Component {
             </Tab>
           </Link>
           <Link 
-            to={{ search: '?tab=user' }} 
+            to={{ pathname: '/search', search: '?tab=user' }} 
             onClick={() => this.onClickTab('user')}
           >
             <Tab active={currentTab === 'user'}>

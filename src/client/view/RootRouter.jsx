@@ -13,7 +13,7 @@ const RootRouter = () => {
       <Normalize />
       <RootRouterStyle />
       <Header />
-      <Route path="/search" component={Search} />
+      <Route path="*" component={Search} />
     </Router>
   );
 }
