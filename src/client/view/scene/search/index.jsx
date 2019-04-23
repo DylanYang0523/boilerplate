@@ -22,9 +22,9 @@ import {
   updatePageOfSearchByUser,
 } from 'Action/tweet';
 
+import SearchInput from './component/SearchInput';
 import ResultTable from './component/ResultTable';
 import Pagination from './component/Pagination';
-import SearchInput from './component/SearchInput';
 
 class Search extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Search extends React.Component {
       isShowingErrorHint: false,
     });
     const { currentTab } = this.state;
-    let canCallApi, callApiStartAction, callApiSuccessAction, callApiEndAction;
+    let callApiStartAction, callApiSuccessAction, callApiEndAction;
     switch (currentTab) {
       case 'hashtag':
         callApiStartAction = this.props.getSearchByHashtagStart;
@@ -124,7 +124,7 @@ class Search extends React.Component {
             to={{ pathname: '/search', search: '?tab=hashtag' }} 
             onClick={() => this.onClickTab('hashtag')}
           >
-            <Tab active={currentTab === 'hashtag'}>
+            <Tab active={ currentTab === 'hashtag' }>
               Hashtag search
             </Tab>
           </Link>
@@ -132,17 +132,19 @@ class Search extends React.Component {
             to={{ pathname: '/search', search: '?tab=user' }} 
             onClick={() => this.onClickTab('user')}
           >
-            <Tab active={currentTab === 'user'}>
+            <Tab active={ currentTab === 'user' }>
               User search
             </Tab>
           </Link>
         </TabContainer>
         <ResultContainer>
-          <ResultTitle>{ `${this.setFirstCharToUppercase(currentTab)} search`}</ResultTitle>
+          <ResultTitle>
+            {`${this.setFirstCharToUppercase(currentTab)} search`}
+          </ResultTitle>
           <SearchInput 
             onClickSearchIcon={(keyword) => this.getTweetData(keyword)} 
-            searchType={this.setFirstCharToUppercase(currentTab)}
-            isFetching={currentDataIsFetching}
+            searchType={ this.setFirstCharToUppercase(currentTab) }
+            isFetching={ currentDataIsFetching }
           />
           {
             isShowingErrorHint &&
@@ -151,7 +153,10 @@ class Search extends React.Component {
             </ErrorHint>
           }
           <ResultTableContainer>
-            <ResultTable data={resultList} isFetching={currentDataIsFetching}/>
+            <ResultTable 
+              data={ resultList } 
+              isFetching={ currentDataIsFetching }
+            />
             { 
               !currentDataIsFetching && currentData.length > 10 ? 
               <Pagination 

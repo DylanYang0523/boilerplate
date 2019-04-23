@@ -1,9 +1,9 @@
 import styled  from 'styled-components';
 
 export const Nav = styled.nav`
-  font-weight: bold;
   background-color: #169dd7;
   color: white;
+  font-weight: bold;
 `;
 
 export const Term = styled.div`

@@ -13,7 +13,7 @@ const Letter = styled.div`
   animation-duration: 1.6s;
   animation-iteration-count: infinite;
   animation-direction: linear;
-`
+`;
 
 export const Letter1 = styled(Letter)`
   animation-delay: .48s;

@@ -3,7 +3,7 @@ import React from 'react';
 import {
   PaginationContainer,
   PageBtn,
-} from '../SearchStyle';
+} from './PaginationStyle';
 
 class Pagination extends React.Component {
   render() {

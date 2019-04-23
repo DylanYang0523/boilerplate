@@ -4,7 +4,7 @@ import {
   SearchInputWrapper,
   Input,
   SearchIcon,
-} from '../SearchStyle';
+} from './SearchInputStyle';
 
 class SearchInput extends React.Component {
   onSearch() {

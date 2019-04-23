@@ -1,5 +1,6 @@
 import React from 'react';
 import Loading from 'Module/loading';
+import { Table } from './ResultTableStyle';
 
 class ResultTable extends React.Component {
   renderTbody(tweets) {
@@ -52,13 +53,10 @@ class ResultTable extends React.Component {
       );
     }
   }
-  renderEmpty() {
-
-  }
   render() {
     const { data } = this.props;
     return (
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>Tweet</th>
@@ -70,7 +68,7 @@ class ResultTable extends React.Component {
           </tr>
         </thead>
         { this.renderTbody(data) }
-      </table>
+      </Table>
     );
   }
 }
