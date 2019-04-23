@@ -2,10 +2,12 @@
 export const getSearchByUserStart = () => ({
   type: 'GET_SEARCH_BY_USER_START',
   payload: {
-    isFetching: true, 
+    isFetching: true,
+    data: [],
+    page: 1,
   },
-})
-export const getSearchByUserSuccess = (data) => ({
+});
+export const getSearchByUserSuccess = data => ({
   type: 'GET_SEARCH_BY_USER_SUCCESS',
   payload: {
     data, 
@@ -28,10 +30,12 @@ export const updatePageOfSearchByUser = page => ({
 export const getSearchByHashtagStart = () => ({
   type: 'GET_SEARCH_BY_HASHTAG_START',
   payload: {
-    isFetching: true, 
+    isFetching: true,
+    data: [],
+    page: 1,
   },
-})
-export const getSearchByHashtagSuccess = (data) => ({
+});
+export const getSearchByHashtagSuccess = data => ({
   type: 'GET_SEARCH_BY_HASHTAG_SUCCESS',
   payload: {
     data, 

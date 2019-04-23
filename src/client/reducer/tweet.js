@@ -18,6 +18,8 @@ const tweet = (state = initState, action) => {
         searchByUser: {
           ...state.searchByUser,
           isFetching: action.payload.isFetching,
+          data: action.payload.data,
+          page: action.payload.page,
         }
       });
     case 'GET_SEARCH_BY_USER_SUCCESS':
@@ -46,6 +48,8 @@ const tweet = (state = initState, action) => {
         searchByHashtag: {
           ...state.searchByHashtag,
           isFetching: action.payload.isFetching,
+          data: action.payload.data,
+          page: action.payload.page,
         }
       });
     case 'GET_SEARCH_BY_HASHTAG_SUCCESS':
