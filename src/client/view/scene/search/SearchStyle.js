@@ -51,6 +51,12 @@ export const SearchIcon = styled.div`
   top: 8px;
 `;
 
+export const ErrorHint = styled.div`
+  margin-top: 8px;
+  font-size: 12px;
+  color: #ff6868;
+`;
+
 export const ResultTableContainer = styled.div`
   margin-top: 30px;
   margin-bottom: 90px;

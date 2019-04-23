@@ -7,6 +7,7 @@ import {
   Tab,
   ResultContainer,
   ResultTitle,
+  ErrorHint,
   ResultTableContainer,
 } from './SearchStyle';
 
@@ -32,9 +33,13 @@ class Search extends React.Component {
     const params = new URLSearchParams(location.search);
     this.state = {
       currentTab: params.get('tab') || 'hashtag',
+      isShowingErrorHint: false,
     }
   }
   getTweetData(keyword) {
+    this.setState({
+      isShowingErrorHint: false,
+    });
     const { currentTab } = this.state;
     let canCallApi, callApiStartAction, callApiSuccessAction, callApiEndAction;
     switch (currentTab) {
@@ -62,7 +67,11 @@ class Search extends React.Component {
       .then(data => {
         callApiSuccessAction(data);
       })
-      .catch(err => {})
+      .catch(err => {
+        this.setState({
+          isShowingErrorHint: true,
+        });
+      })
       .finally(() => {
         callApiEndAction();
       });
@@ -89,13 +98,16 @@ class Search extends React.Component {
     }
   }
   onClickTab(tabName) {
-    this.setState({ currentTab: tabName });
+    this.setState({ 
+      currentTab: tabName,
+      isShowingErrorHint: false, 
+    });
   }
   setFirstCharToUppercase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   render() {
-    const { currentTab } = this.state;
+    const { currentTab, isShowingErrorHint } = this.state;
     const { 
       currentPage,
       currentData, 
@@ -132,6 +144,12 @@ class Search extends React.Component {
             searchType={this.setFirstCharToUppercase(currentTab)}
             isFetching={currentDataIsFetching}
           />
+          {
+            isShowingErrorHint &&
+            <ErrorHint>
+              Sorry, we can't handle the search keyword, please try another one.
+            </ErrorHint>
+          }
           <ResultTableContainer>
             <ResultTable data={resultList} isFetching={currentDataIsFetching}/>
             { 
