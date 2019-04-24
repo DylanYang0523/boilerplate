@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+// styles
 import {
   TabContainer,
   Tab,
@@ -11,6 +12,7 @@ import {
   ResultTableContainer,
 } from './SearchStyle';
 
+// actions
 import { 
   getSearchByHashtagStart,
   getSearchByHashtagSuccess,
@@ -22,20 +24,39 @@ import {
   updatePageOfSearchByUser,
 } from 'Action/tweet';
 
+// components
 import SearchInput from './component/SearchInput';
 import ResultTable from './component/ResultTable';
 import Pagination from './component/Pagination';
 
+/**
+ * Search component for /search page.
+ */
 class Search extends React.Component {
+  /**
+   * constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     const { location } = props;
     const params = new URLSearchParams(location.search);
+
+    /**
+     * @type {object}
+     * @prop {string} [currentTab=hashtag] - The current tab page.
+     * @prop {boolean} [isShowingErrorHint=false] - When API call fail, the user can get error hint.
+     */
     this.state = {
       currentTab: params.get('tab') || 'hashtag',
       isShowingErrorHint: false,
     }
   }
+
+  /**
+   * Fetch twitter API data by keyword.
+   * @param {*} keyword - The keyword can be used in both hashtag or user's tweet searching.
+   */
   getTweetData(keyword) {
     this.setState({
       isShowingErrorHint: false,
@@ -76,6 +97,18 @@ class Search extends React.Component {
         callApiEndAction();
       });
   }
+
+  /**
+   * @type {object} CurrentInfo
+   * @prop {number} currentPage - The page number of the current tab page.
+   * @prop {object[]} currentData - The tweet data of the current tab page.
+   * @prop {boolean} currentDataIsFetching - A boolean value for checking the current tab page is fetching data or not.
+   * @prop {function} currentPageClickAction - The proper redux action of the current tab page.
+   */
+  /**
+   * Return a set of needed info which bases on the current tab page.
+   * @return {CurrentInfo}
+   */
   setCurrentValue() {
     const { currentTab } = this.state;
     switch (currentTab) {
@@ -97,15 +130,30 @@ class Search extends React.Component {
         return {};
     }
   }
+
+  /**
+   * Handle on tab button click.
+   * @param {string} tabName - The name of next screen tab.
+   */
   onClickTab(tabName) {
     this.setState({ 
       currentTab: tabName,
       isShowingErrorHint: false, 
     });
   }
+
+  /**
+   * Convert the first character of a string to uppercase.
+   * @param {string} str
+   */
   setFirstCharToUppercase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+  
+  /**
+   * render
+   * @return {ReactElement} - Markup.
+   */
   render() {
     const { currentTab, isShowingErrorHint } = this.state;
     const { 

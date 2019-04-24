@@ -11,6 +11,7 @@ const renderApp = () => {
   ReactDOM.render(<App />, root);
 };
 
+// create redux store and set the redux browser extension
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -28,6 +29,7 @@ class App extends React.Component {
 
 renderApp();
 
+// set webpack dev server hmr
 if (module.hot) {
   module.hot.accept(App, renderApp);
 }

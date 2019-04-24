@@ -2,7 +2,14 @@ import React from 'react';
 import Loading from 'Module/loading';
 import { Table } from './ResultTableStyle';
 
+/**
+ * ResultTable component for presenting the search result data.
+ */
 class ResultTable extends React.Component {
+  /**
+   * render
+   * @return {ReactElement} - Markup of table's tbody.
+   */
   renderTbody(tweets) {
     const { data, isFetching } = this.props;
     if (isFetching) {
@@ -53,6 +60,11 @@ class ResultTable extends React.Component {
       );
     }
   }
+
+  /**
+   * render
+   * @return {ReactElement} - Markup.
+   */
   render() {
     const { data } = this.props;
     return (

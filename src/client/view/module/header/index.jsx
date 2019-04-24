@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Nav, Term } from './HeaderStyle';
 
 class Header extends React.Component {

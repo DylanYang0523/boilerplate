@@ -5,7 +5,14 @@ import {
   PageBtn,
 } from './PaginationStyle';
 
+/**
+ * Pagination component for page controls.
+ */
 class Pagination extends React.Component {
+  /**
+   * render
+   * @return {ReactElement} - Markup.
+   */
   render() {
     const { onClickPage, currentPage, totalPage } = this.props;
     let pageBtn = [];

@@ -6,7 +6,13 @@ import {
   SearchIcon,
 } from './SearchInputStyle';
 
+/**
+ * SearchInput component for user to type the keyword.
+ */
 class SearchInput extends React.Component {
+  /**
+   * Trigger the search function which was passed in by the props.
+   */
   onSearch() {
     const { onClickSearchIcon, isFetching } = this.props;
     if (isFetching) return;
@@ -14,11 +20,21 @@ class SearchInput extends React.Component {
     this.searchInput.value = '';
     onClickSearchIcon(inputValue);
   }
+
+  /**
+   * Bind the key 'enter' to trigger search method.
+   * @param {object} event
+   */
   handleKeyPress(event) {
     if(event.key == 'Enter'){
       this.onSearch();
     }
   }
+
+  /**
+   * render
+   * @return {ReactElement} - Markup.
+   */
   render() {
     const { searchType } = this.props;
     return (

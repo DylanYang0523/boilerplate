@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from 'Module/header';
 import Search from 'Scene/search';
 
+// normalize and global css
 import { Normalize } from 'styled-normalize'
 import RootRouterStyle from './RootRouterStyle';
 

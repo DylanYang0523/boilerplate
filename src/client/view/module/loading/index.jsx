@@ -12,7 +12,14 @@ import {
   Letter10,
 } from './LoadingStyle';
 
+/**
+ * Loading component.
+ */
 class Loading extends React.Component {
+  /**
+   * render
+   * @return {ReactElement} - Markup.
+   */
   render() {
     return (
       <div>
