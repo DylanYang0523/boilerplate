@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs-extra';
 import https from 'https';
 import appRootPath from 'app-root-path';
+import ssr from '../middleware/ssr';
 
 const app = express();
 
@@ -19,10 +20,7 @@ switch (process.env.NODE_ENV) {
 app.use(express.static('public'));
 app.set('views', appRootPath.resolve('/src/server/view'));
 app.set('view engine', 'pug');
-app.all('/*', (_req, res) => {
-  res.render('index');
-  // res.render('index', settings);
-});
+app.all('/*', ssr);
 
 const keyPath = appRootPath.resolve('/server.key.pem');
 const certPath = appRootPath.resolve('/server.cert.pem');

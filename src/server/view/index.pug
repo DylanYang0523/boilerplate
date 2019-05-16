@@ -4,6 +4,7 @@ html
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
   body
     div(id='root')
-    //- script.
-    //-   config=!{JSON.stringify(config)}
+      #{html}
+    script.
+      window.__PRELOADED_STATE__=!{JSON.stringify(preloadedState)}
     script(type='text/javascript' src='/bundle.js')

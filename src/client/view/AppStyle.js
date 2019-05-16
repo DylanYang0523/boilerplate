@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const RootRouterStyle = createGlobalStyle`
+const AppStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: 'Arial';
@@ -32,4 +32,4 @@ const RootRouterStyle = createGlobalStyle`
   }
 `;
 
-export default RootRouterStyle;
+export default AppStyle;

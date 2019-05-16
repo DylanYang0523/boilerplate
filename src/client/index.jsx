@@ -2,30 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import RootRouter from 'View/RootRouter';
+import App from 'View/App';
 import rootReducer from 'Reducer';
 
-const root = document.querySelector('#root');
-const renderApp = () => {
-  ReactDOM.render(<App />, root);
-};
+// Grab the state from a global variable injected into the server-generated HTML
+const preloadedState = window.__PRELOADED_STATE__;
+delete window.__PRELOADED_STATE__;
 
 // create redux store and set the redux browser extension
 const store = createStore(
   rootReducer,
+  preloadedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <RootRouter />
-      </Provider>
-    )
-  }
-}
+
+const root = document.querySelector('#root');
+const renderMethod = process.browser ? ReactDOM.render : ReactDOM.hydrate;
+const renderApp = () => {
+  renderMethod(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  , root);
+};
 
 renderApp();
 
