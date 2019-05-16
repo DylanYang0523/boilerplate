@@ -20,6 +20,7 @@ const store = createStore(
 
 
 const root = document.querySelector('#root');
+// [Refer Solution](https://github.com/leebenson/reactql/blob/master/src/entry/client.tsx)
 const renderMethod = process.browser ? ReactDOM.render : ReactDOM.hydrate;
 const renderApp = () => {
   renderMethod(

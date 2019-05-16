@@ -2,9 +2,10 @@ html
   head
     title=title
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    !=styleTags
   body
     div(id='root')
-      #{html}
+      !=html
     script.
       window.__PRELOADED_STATE__=!{JSON.stringify(preloadedState)}
     script(type='text/javascript' src='/bundle.js')
