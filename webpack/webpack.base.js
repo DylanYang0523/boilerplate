@@ -10,6 +10,9 @@ switch (process.env.NODE_ENV) {
   case 'development':
     webpackConfig = require('./webpack.dev.js');
     break;
+  case 'analyse':
+    webpackConfig = require('./webpack.analyse.js');
+    break;
 };
 
 module.exports = webpackMerge(webpackConfig, {
