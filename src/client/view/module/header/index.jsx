@@ -21,7 +21,7 @@ class Header extends React.Component {
       getUserInfoSuccess,
       getUserInfoEnd,
     } = this.props;
-    
+
     getUserInfoStart();
     const apiUrl = 'https://jsonplaceholder.typicode.com/users';
     fetch(apiUrl, {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from 'Module/header';
+import Home from 'Scene/home';
 import Search from 'Scene/search';
 
 // normalize and global css
@@ -15,7 +16,8 @@ const App = () => {
       <AppStyle />
       <Header />
       <Switch>
-        <Route path="*" component={Search} />
+        <Route path="/" exact component={Home} />
+        <Route path="/search" exact component={Search} />
       </Switch>
     </React.Fragment>
   );
